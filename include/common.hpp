@@ -24,17 +24,13 @@
 *         reasonable ways as different from the original version.
 */
 
-#ifndef UTILS_HPP
-#define UTILS_HPP
+#ifndef COMMON_HPP
+#define COMMON_HPP
 
-#include "smdh.hpp"
-
-#include <3ds.h>
-#include <string>
-
-std::u16string UTF8toUTF16(const char* src);
-std::string UTF16toUTF8(const std::u16string& src);
-std::string format(std::string fmt_str, ...);
-std::string timeStr(void);
+// This is the new "screenCommon.hpp", lol.
+#include "gfx.hpp"
+#include "gui.hpp"
+#include "msg.hpp"
+#include "screenCommon.hpp"
 
 #endif

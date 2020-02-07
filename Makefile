@@ -55,9 +55,10 @@ VERSION_STRING := "Version: $(VERSION_MAJOR).$(VERSION_MINOR).$(VERSION_MICRO)"
 #---------------------------------------------------------------------------------
 TARGET		:=	HomeMen3D
 BUILD		:=	build
-SOURCES		:=	source source/core source/core/management source/screens source/utils
+UNIVCORE	:=	Universal-Core
+SOURCES		:=	$(UNIVCORE) source source/core source/core/management source/screens source/utils
 DATA		:=	data
-INCLUDES	:=	include include/core include/core/management include/screens include/utils
+INCLUDES	:=	$(UNIVCORE) include include/core include/core/management include/screens include/utils
 GRAPHICS	:=	assets/gfx
 ROMFS		:=	romfs
 GFXBUILD	:=	$(ROMFS)/gfx

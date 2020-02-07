@@ -24,17 +24,36 @@
 *         reasonable ways as different from the original version.
 */
 
-#ifndef UTILS_HPP
-#define UTILS_HPP
+#ifndef GFX_HPP
+#define GFX_HPP
 
-#include "smdh.hpp"
+#include "sprites.h"
 
 #include <3ds.h>
-#include <string>
+#include <citro2d.h>
 
-std::u16string UTF8toUTF16(const char* src);
-std::string UTF16toUTF8(const std::u16string& src);
-std::string format(std::string fmt_str, ...);
-std::string timeStr(void);
+// Colors.
+#define BLACK 			C2D_Color32(0, 0, 0, 255)
+#define WHITE 			C2D_Color32(255, 255, 255, 255)
+#define RED				C2D_Color32(255, 0, 0, 255)
+#define GREEN			C2D_Color32(0, 255, 0, 255)
+#define BLUE			C2D_Color32(0, 0, 255, 255)
+
+#define BARCOLOR        C2D_Color32(0, 0, 180, 255)
+#define BGCOLOR         C2D_Color32(0, 0, 0, 255)
+#define BUTTONSELECTCOLOR   C2D_Color32(61, 61, 61, 255)
+#define BUTTONUNSELECTCOLOR C2D_Color32(61, 61, 61, 160)
+
+typedef u32 Color;
+
+namespace GFX
+{
+	// Basic GUI.
+	void DrawTop(void);
+	void DrawBottom(void);
+
+	void DrawSprite(int img, int x, int y, float ScaleX = 1, float ScaleY = 1);
+	void DrawBatteryTop(void);
+}
 
 #endif

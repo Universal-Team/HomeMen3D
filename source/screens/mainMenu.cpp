@@ -1,6 +1,6 @@
 /*
 *   This file is part of HomeMen3D
-*   Copyright (C) 2019 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
+*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,11 +24,8 @@
 *         reasonable ways as different from the original version.
 */
 
-#include "gui.hpp"
-
-#include "screens/mainMenu.hpp"
-
-#include "utils/utils.hpp"
+#include "mainMenu.hpp"
+#include "utils.hpp"
 
 extern bool exiting;
 
@@ -48,11 +45,11 @@ void MainMenu::Draw(void) const
 }
 
 void MainMenu::DrawMenu(void) const {
-	Gui::DrawTop();
+	GFX::DrawTop();
 	Gui::DrawString(0, 2, 0.7f, WHITE, timeStr());
-	drawBatteryTop();
+	GFX::DrawBatteryTop();
 	Gui::DrawString(397-Gui::GetStringWidth(0.6f, "Titles: " + std::to_string(selectedTitle + 1) + " / " + std::to_string(maxTitles)), 237-Gui::GetStringHeight(0.6f, "Titles: " + std::to_string(selectedTitle + 1) + " / " + std::to_string(maxTitles)), 0.6f, WHITE, "Titles: " + std::to_string(selectedTitle + 1) + " / " + std::to_string(maxTitles));
-	Gui::DrawBottom();
+	GFX::DrawBottom();
 
 	Gui::Draw_Rect(0, 215, 160, 25, C2D_Color32(0, 0, 160, 255));
 	Gui::Draw_Rect(160, 215, 160, 25, C2D_Color32(0, 0, 160, 190));

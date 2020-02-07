@@ -24,17 +24,40 @@
 *         reasonable ways as different from the original version.
 */
 
-#ifndef UTILS_HPP
-#define UTILS_HPP
+#include "common.hpp"
 
-#include "smdh.hpp"
+void Msg::DisplayMsg(std::string text) {
+	Gui::clearTextBufs();
+	C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+	C2D_TargetClear(Top, BLACK);
+	C2D_TargetClear(Bottom, BLACK);
+	GFX::DrawTop();
+	Gui::DrawString(10, 40, 0.45f, WHITE, text, 380);
+	GFX::DrawBottom();
+	C3D_FrameEnd(0);
+}
 
-#include <3ds.h>
-#include <string>
+// Display a Message, which needs to be confirmed with A/B.
+bool Msg::promptMsg(std::string promptMsg, std::string AOption, std::string BOption)
+{
+	Gui::clearTextBufs();
+	C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
+	C2D_TargetClear(Top, BLACK);
+	C2D_TargetClear(Bottom, BLACK);
+	GFX::DrawTop();
+	Gui::DrawString(10, 100, 0.6f, WHITE, promptMsg.c_str(), 400);
+	Gui::DrawString(10, 180, 0.6f, WHITE, "\uE000: " + AOption + "   \uE001: " + BOption, 400);
+	GFX::DrawBottom();
+	C3D_FrameEnd(0);
 
-std::u16string UTF8toUTF16(const char* src);
-std::string UTF16toUTF8(const std::u16string& src);
-std::string format(std::string fmt_str, ...);
-std::string timeStr(void);
-
-#endif
+	while(1)
+	{
+		gspWaitForVBlank();
+		hidScanInput();
+		if(hidKeysDown() & KEY_A) {
+			return true;
+		} else if(hidKeysDown() & KEY_B) {
+			return false;
+		}
+	}
+}

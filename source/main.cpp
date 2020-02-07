@@ -1,6 +1,6 @@
 /*
 *   This file is part of HomeMen3D
-*   Copyright (C) 2019 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
+*   Copyright (C) 2019-2020 DeadPhoenix8091, Epicpkmn11, Flame, RocketRobz, StackZ, TotallyNotGuy
 *
 *   This program is free software: you can redistribute it and/or modify
 *   it under the terms of the GNU General Public License as published by
@@ -24,71 +24,8 @@
 *         reasonable ways as different from the original version.
 */
 
-#include "colors.hpp"
-#include "gui.hpp"
+#include "init.hpp"
 
-#include "core/management/gameManagement.hpp"
-
-#include "screens/mainMenu.hpp"
-#include "screens/screenCommon.hpp"
-
-#include "utils/ptmu_x.h"
-
-#include <dirent.h>
-
-bool exiting = false;
-
-// Set to true, if Citra is used.
-bool isCitra = false;
-
-touchPosition touch;
-
-int main()
-{
-	gfxInitDefault();
-	romfsInit();
-	Gui::init();
-	acInit();
-	// For battery status
-	ptmuInit();
-	// For AC adapter status
-	ptmuxInit();
-	
-	if (!isCitra) {
-		mcuInit();
-	}
-	cfguInit();
-
-	mkdir("sdmc:/3ds", 0777);
-	mkdir("sdmc:/3ds/HomeMen3D", 0777);
-
-	DisplayMsg("Scanning for available 3DS Titles...");
-	GameManagement::scanTitleID();
-
-	// Set Screen to MainMenu.
-	Screen::set(std::make_unique<MainMenu>());
-
-	osSetSpeedupEnable(true);	// Enable speed-up for New 3DS users.
-
-	// Loop as long as the status is not exit.
-	while (aptMainLoop() && !exiting)
-	{
-		// Scan Input.
-		hidScanInput();
-		u32 hHeld = hidKeysHeld();
-		u32 hDown = hidKeysDown();
-		hidTouchRead(&touch);
-
-		C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
-		C2D_TargetClear(Top, BLACK);
-		C2D_TargetClear(Bottom, BLACK);
-		Gui::clearTextBufs();
-		Screen::loop(hDown, hHeld, touch);
-		C3D_FrameEnd(0);
-	}
-	Gui::exit();
-	gfxExit();
-	cfguExit();
-	romfsExit();
-	return 0;
+int main() {
+	Init::MainLoop();
 }

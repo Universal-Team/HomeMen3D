@@ -1,4 +1,4 @@
-#include "utils/smdh.hpp"
+#include "smdh.hpp"
 
 smdh_s* loadSMDH(u32 low, u32 high, u8 media)
 {

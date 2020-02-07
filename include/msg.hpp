@@ -24,17 +24,15 @@
 *         reasonable ways as different from the original version.
 */
 
-#ifndef UTILS_HPP
-#define UTILS_HPP
+#ifndef MSG_HPP
+#define MSG_HPP
 
-#include "smdh.hpp"
-
-#include <3ds.h>
 #include <string>
 
-std::u16string UTF8toUTF16(const char* src);
-std::string UTF16toUTF8(const std::u16string& src);
-std::string format(std::string fmt_str, ...);
-std::string timeStr(void);
+namespace Msg
+{
+	void DisplayMsg(std::string text);
+	bool promptMsg(std::string promptMsg, std::string AOption, std::string BOption);
+}
 
 #endif
