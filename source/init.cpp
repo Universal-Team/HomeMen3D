@@ -75,12 +75,12 @@ Result Init::Initialize() {
 	Gui::setScreen(std::make_unique<MainMenu>());
 
 	osSetSpeedupEnable(true);	// Enable speed-up for New 3DS users.
-    return 0;
+	return 0;
 }
 
 Result Init::MainLoop() {
-    // Initialize everything.
-    Initialize();
+	// Initialize everything.
+	Initialize();
 
 	// Loop as long as the status is not exiting.
 	while (aptMainLoop() && !exiting)
@@ -97,9 +97,9 @@ Result Init::MainLoop() {
 		C3D_FrameEnd(0);
 		gspWaitForVBlank();
 	}
-    // Exit all services and exit the app.
-    Exit();
-    return 0;
+	// Exit all services and exit the app.
+	Exit();
+	return 0;
 }
 
 Result Init::Exit() {
